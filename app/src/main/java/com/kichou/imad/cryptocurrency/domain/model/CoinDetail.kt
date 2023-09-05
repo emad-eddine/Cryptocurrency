@@ -1,5 +1,7 @@
 package com.kichou.imad.cryptocurrency.domain.model
 
+import com.kichou.imad.cryptocurrency.data.remote.dto.TeamMember
+
 data class CoinDetail(
 
     val coinId : String,
@@ -9,6 +11,6 @@ data class CoinDetail(
     val rank : Int,
     val isActive : Boolean,
     val tags : List<String>,
-    val team : List<String>
+    val team : List<TeamMember>
 
 )

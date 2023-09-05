@@ -17,19 +17,19 @@ class GetCoinsUseCase @Inject constructor(
 
         try {
 
-             emit(Resource.Loading())
+             emit(Resource.Loading<List<Coin>>())
              val coins = repository.getAllCoins().map {
                  it.toCoin()
              }
 
-            emit(Resource.Success(coins))
+            emit(Resource.Success<List<Coin>>(coins))
 
         }catch (e : HttpException){
 
-            emit(Resource.Error(e.localizedMessage ?: "An unexpected error"))
+            emit(Resource.Error<List<Coin>>(e.localizedMessage ?: "An unexpected error"))
 
         }catch (e: IOException){
-            emit(Resource.Error("Couldn't reach the server"))
+            emit(Resource.Error<List<Coin>>("Couldn't reach the server"))
         }
 
 

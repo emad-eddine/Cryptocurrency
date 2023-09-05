@@ -19,17 +19,21 @@ class GetCoinUseCase @Inject constructor(
 
         try {
 
-             emit(Resource.Loading())
+             emit(Resource.Loading<CoinDetail>())
+
+
              val coin = repository.getCoinById(coinId).toCoindDetail()
 
-            emit(Resource.Success(coin))
+            println("coin value ${coin.name}")
+
+            emit(Resource.Success<CoinDetail>(data = coin))
 
         }catch (e : HttpException){
 
-            emit(Resource.Error(e.localizedMessage ?: "An unexpected error"))
+            emit(Resource.Error<CoinDetail>(e.localizedMessage ?: "An unexpected error"))
 
         }catch (e: IOException){
-            emit(Resource.Error("Couldn't reach the server"))
+            emit(Resource.Error<CoinDetail>("Couldn't reach the server"))
         }
 
 
